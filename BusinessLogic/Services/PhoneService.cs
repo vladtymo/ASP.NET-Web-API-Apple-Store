@@ -67,7 +67,7 @@ namespace BusinessLogic.Services
 
         public IEnumerable<PhoneDTO> GetAll()
         {
-            var phones = context.Phones.ToList();
+            var phones = context.Phones.Include(p => p.Color).ToList();
             return mapper.Map<IEnumerable<PhoneDTO>>(phones);
         }
     }
