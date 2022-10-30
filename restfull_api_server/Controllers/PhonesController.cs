@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.DTOs;
+using BusinessLogic.Interfaces;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
@@ -34,7 +35,7 @@ namespace restfull_api_server.Controllers
 
         // POST: ~/api/phones
         [HttpPost]
-        public IActionResult Create([FromBody] Phone phone) // get parameter from body (JSON)
+        public IActionResult Create([FromBody] PhoneDTO phone) // get parameter from body (JSON)
         {
             if (!ModelState.IsValid) return BadRequest();
 
@@ -45,7 +46,7 @@ namespace restfull_api_server.Controllers
 
         // PUT: ~/api/phones
         [HttpPut]
-        public IActionResult Edit([FromBody] Phone phone)
+        public IActionResult Edit([FromBody] PhoneDTO phone)
         {
             if (!ModelState.IsValid) return BadRequest();
 

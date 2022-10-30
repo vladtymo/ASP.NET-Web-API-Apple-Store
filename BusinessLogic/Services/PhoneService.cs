@@ -1,6 +1,9 @@
-﻿using BusinessLogic.Interfaces;
+﻿using AutoMapper;
+using BusinessLogic.DTOs;
+using BusinessLogic.Interfaces;
 using DataAccess;
 using DataAccess.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +15,28 @@ namespace BusinessLogic.Services
     public class PhoneService : IPhoneService
     {
         private readonly StoreDbContext context;
-        public PhoneService(StoreDbContext context)
+        private readonly IMapper mapper;
+
+        public PhoneService(StoreDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
-        public void Create(Phone phone)
+        public void Create(PhoneDTO phone)
         {
-            context.Phones.Add(phone);
+            //Phone entity = new()
+            //{
+            //    Id = phone.Id,
+            //    Model = phone.Model,
+            //    ColorId = phone.ColorId,
+            //    Price = phone.Price,
+            //    Memory = phone.Memory,
+            //    Description = phone.Description,
+            //    ImagePath = phone.ImagePath
+            //};
+
+            context.Phones.Add(mapper.Map<Phone>(phone));
             context.SaveChanges();
         }
 
@@ -33,24 +50,25 @@ namespace BusinessLogic.Services
             context.SaveChanges();
         }
 
-        public void Edit(Phone phone)
+        public void Edit(PhoneDTO phone)
         {
-            context.Phones.Update(phone);
+            context.Phones.Update(mapper.Map<Phone>(phone));
             context.SaveChanges();
         }
 
-        public Phone? Get(int id)
+        public PhoneDTO? Get(int id)
         {
             var phone = context.Phones.Find(id);
 
             //if (phone == null) return null; // throw exception
 
-            return phone;
+            return mapper.Map<PhoneDTO>(phone);
         }
 
-        public IEnumerable<Phone> GetAll()
+        public IEnumerable<PhoneDTO> GetAll()
         {
-            return context.Phones.ToList();
+            var phones = context.Phones.ToList();
+            return mapper.Map<IEnumerable<PhoneDTO>>(phones);
         }
     }
 }

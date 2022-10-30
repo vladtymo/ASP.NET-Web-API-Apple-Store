@@ -2,6 +2,7 @@ using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ string connectionString = builder.Configuration.GetConnectionString("LocalDb");
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<StoreDbContext>(x => x.UseSqlServer(connectionString));
+
+// add AutoMapper with profile classes
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 // add custom service: Singleton, Scope, Transient
 builder.Services.AddScoped<IPhoneService, PhoneService>();
