@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "restfull_api_server", "restfull_api_server\restfull_api_server.csproj", "{933553A4-7CF8-4879-A8B8-3713D19CE82F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "restfull_api_server", "restfull_api_server\restfull_api_server.csproj", "{933553A4-7CF8-4879-A8B8-3713D19CE82F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "data_access\DataAccess.csproj", "{7E2644B3-1800-4F4F-83BB-7E73415E93A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{E81B517B-75C4-4467-BF6C-F12E4CABF4B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7E2644B3-1800-4F4F-83BB-7E73415E93A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E2644B3-1800-4F4F-83BB-7E73415E93A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E2644B3-1800-4F4F-83BB-7E73415E93A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E81B517B-75C4-4467-BF6C-F12E4CABF4B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E81B517B-75C4-4467-BF6C-F12E4CABF4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E81B517B-75C4-4467-BF6C-F12E4CABF4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E81B517B-75C4-4467-BF6C-F12E4CABF4B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

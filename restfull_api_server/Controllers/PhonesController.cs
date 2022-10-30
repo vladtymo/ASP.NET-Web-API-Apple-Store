@@ -1,7 +1,9 @@
-﻿using DataAccess;
+﻿using BusinessLogic.Interfaces;
+using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
 
 namespace restfull_api_server.Controllers
 {
@@ -9,37 +11,34 @@ namespace restfull_api_server.Controllers
     [ApiController]
     public class PhonesController : ControllerBase
     {
-        private readonly StoreDbContext context;
+        private readonly IPhoneService phoneService;
 
-        public PhonesController(StoreDbContext context)
+        public PhonesController(IPhoneService phoneService)
         {
-            this.context = context;
+            this.phoneService = phoneService;
         }
 
         [HttpGet("collection")]          // GET: ~/api/phones/collection
         //[HttpGet("/phone-collection")] // GET: ~/phone-collection
         public IActionResult GetAll()
         {
-            return Ok(context.Phones.ToList());
+            return Ok(phoneService.GetAll());
         }
 
         // GET: ~/api/phones/{id}
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id) // get parameter from route URL
         {
-            var phone = context.Phones.Find(id);
-
-            if (phone == null) return NotFound();
-
-            return Ok(phone);
+            return Ok(phoneService.Get(id));
         }
 
         // POST: ~/api/phones
         [HttpPost]
         public IActionResult Create([FromBody] Phone phone) // get parameter from body (JSON)
         {
-            context.Phones.Add(phone);
-            context.SaveChanges();
+            if (!ModelState.IsValid) return BadRequest();
+
+            phoneService.Create(phone);
 
             return Ok();
         }
@@ -48,23 +47,18 @@ namespace restfull_api_server.Controllers
         [HttpPut]
         public IActionResult Edit([FromBody] Phone phone)
         {
-            context.Phones.Update(phone);
-            context.SaveChanges();
+            if (!ModelState.IsValid) return BadRequest();
+
+            phoneService.Edit(phone);
 
             return Ok();
         }
 
         // DELETE: ~/api/phones
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete([FromRoute] int id)
         {
-            var phone = context.Phones.Find(id);
-
-            if (phone == null) return NotFound();
-
-            context.Phones.Remove(phone);
-            context.SaveChanges();
-
+            phoneService.Delete(id);
             return Ok();
         }
     }

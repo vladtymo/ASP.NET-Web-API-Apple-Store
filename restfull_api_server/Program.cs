@@ -1,3 +1,5 @@
+using BusinessLogic.Interfaces;
+using BusinessLogic.Services;
 using DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +12,9 @@ string connectionString = builder.Configuration.GetConnectionString("LocalDb");
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<StoreDbContext>(x => x.UseSqlServer(connectionString));
+
+// add custom service: Singleton, Scope, Transient
+builder.Services.AddScoped<IPhoneService, PhoneService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
