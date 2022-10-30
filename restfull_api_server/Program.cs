@@ -1,6 +1,8 @@
 using BusinessLogic.Interfaces;
 using BusinessLogic.Services;
 using DataAccess;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,6 +18,10 @@ builder.Services.AddDbContext<StoreDbContext>(x => x.UseSqlServer(connectionStri
 
 // add AutoMapper with profile classes
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// add FluentValidator with validation classes
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
 // add custom service: Singleton, Scope, Transient
 builder.Services.AddScoped<IPhoneService, PhoneService>();
