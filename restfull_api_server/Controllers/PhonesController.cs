@@ -1,9 +1,11 @@
 ﻿using BusinessLogic.DTOs;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Numerics;
 
 namespace restfull_api_server.Controllers

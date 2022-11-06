@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOs;
+using BusinessLogic.Exceptions;
 using BusinessLogic.Interfaces;
+using BusinessLogic.Resources;
 using DataAccess;
 using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +28,7 @@ namespace BusinessLogic.Services
 
         public void Create(PhoneDTO phone)
         {
+            // we used AutoMapper instead
             //Phone entity = new()
             //{
             //    Id = phone.Id,
@@ -44,7 +48,8 @@ namespace BusinessLogic.Services
         {
             var phone = context.Phones.Find(id);
 
-            if (phone == null) return; // throw exception
+            if (phone == null) 
+                throw new HttpException(ErrorMessages.PhoneNotFound, HttpStatusCode.NotFound);
 
             context.Phones.Remove(phone);
             context.SaveChanges();
@@ -60,7 +65,8 @@ namespace BusinessLogic.Services
         {
             var phone = context.Phones.Find(id);
 
-            //if (phone == null) return null; // throw exception
+            if (phone == null) 
+                throw new HttpException(ErrorMessages.PhoneNotFound, HttpStatusCode.NotFound);
 
             return mapper.Map<PhoneDTO>(phone);
         }

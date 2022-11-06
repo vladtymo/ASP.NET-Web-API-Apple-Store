@@ -5,6 +5,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using restfull_api_server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Add Exception Handler middleware
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthorization();
 
