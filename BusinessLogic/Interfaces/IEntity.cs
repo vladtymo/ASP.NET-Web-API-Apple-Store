@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.DTOs
+namespace Core.Interfaces
 {
-    public class LoginDTO
+    public interface IBaseEntity
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+
     }
 }

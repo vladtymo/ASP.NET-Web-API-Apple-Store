@@ -1,8 +1,7 @@
-﻿using BusinessLogic.DTOs;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Interfaces;
-using DataAccess;
-using DataAccess.Entities;
+﻿using Core.DTOs;
+using Core.Exceptions;
+using Core.Interfaces;
+using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

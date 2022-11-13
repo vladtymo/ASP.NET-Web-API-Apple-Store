@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Entities
+namespace Core.Entities
 {
     public enum Colors : int
     {
@@ -20,7 +21,7 @@ namespace DataAccess.Entities
         SierraBlue,
         Midnight
     }
-    public class Color
+    public class Color : IBaseEntity
     {
         public int Id { get; set; }
         [Required, MinLength(3)]

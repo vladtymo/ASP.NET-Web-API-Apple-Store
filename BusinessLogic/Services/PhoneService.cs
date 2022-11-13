@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
-using BusinessLogic.DTOs;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Interfaces;
-using BusinessLogic.Resources;
-using DataAccess;
-using DataAccess.Entities;
-using Microsoft.EntityFrameworkCore;
+using Core.DTOs;
+using Core.Entities;
+using Core.Exceptions;
+using Core.Interfaces;
+using Core.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +11,16 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class PhoneService : IPhoneService
     {
-        private readonly StoreDbContext context;
+        private readonly IRepository<Phone> phoneRepo;
         private readonly IMapper mapper;
 
-        public PhoneService(StoreDbContext context, IMapper mapper)
+        public PhoneService(IRepository<Phone> phoneRepo, IMapper mapper)
         {
-            this.context = context;
+            this.phoneRepo = phoneRepo;
             this.mapper = mapper;
         }
 
@@ -40,30 +38,30 @@ namespace BusinessLogic.Services
             //    ImagePath = phone.ImagePath
             //};
 
-            context.Phones.Add(mapper.Map<Phone>(phone));
-            context.SaveChanges();
+            phoneRepo.Insert(mapper.Map<Phone>(phone));
+            phoneRepo.Save();
         }
 
         public void Delete(int id)
         {
-            var phone = context.Phones.Find(id);
+            var phone = phoneRepo.GetByID(id);
 
             if (phone == null) 
                 throw new HttpException(ErrorMessages.PhoneNotFound, HttpStatusCode.NotFound);
 
-            context.Phones.Remove(phone);
-            context.SaveChanges();
+            phoneRepo.Delete(phone);
+            phoneRepo.Save();
         }
 
         public void Edit(PhoneDTO phone)
         {
-            context.Phones.Update(mapper.Map<Phone>(phone));
-            context.SaveChanges();
+            phoneRepo.Update(mapper.Map<Phone>(phone));
+            phoneRepo.Save();
         }
 
         public PhoneDTO? Get(int id)
         {
-            var phone = context.Phones.Find(id);
+            var phone = phoneRepo.GetByID(id);
 
             if (phone == null) 
                 throw new HttpException(ErrorMessages.PhoneNotFound, HttpStatusCode.NotFound);
@@ -73,7 +71,7 @@ namespace BusinessLogic.Services
 
         public IEnumerable<PhoneDTO> GetAll()
         {
-            var phones = context.Phones.Include(p => p.Color).ToList();
+            var phones = phoneRepo.Get(includeProperties: $"{nameof(Phone.Color)}");
             return mapper.Map<IEnumerable<PhoneDTO>>(phones);
         }
     }

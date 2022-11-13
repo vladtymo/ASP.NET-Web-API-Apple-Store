@@ -1,7 +1,7 @@
-﻿using BusinessLogic.DTOs;
-using BusinessLogic.Exceptions;
-using BusinessLogic.Interfaces;
-using BusinessLogic.Resources;
+﻿using Core.DTOs;
+using Core.Exceptions;
+using Core.Interfaces;
+using Core.Resources;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Services
+namespace Core.Services
 {
     public class AccountService : IAccountService
     {

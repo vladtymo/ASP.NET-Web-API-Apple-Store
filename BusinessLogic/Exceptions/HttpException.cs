@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Exceptions
+namespace Core.Exceptions
 {
 	[Serializable]
 	public class HttpException : Exception

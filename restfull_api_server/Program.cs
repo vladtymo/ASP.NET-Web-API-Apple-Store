@@ -1,6 +1,6 @@
-using BusinessLogic.Interfaces;
-using BusinessLogic.Services;
-using DataAccess;
+using Core.Interfaces;
+using Core.Services;
+using Infrastructure;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +20,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<StoreDbContext>(x => x.UseSqlServer(connectionString));
 
+// add repository
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<StoreDbContext>()
     .AddDefaultTokenProviders();
@@ -30,6 +33,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // add FluentValidator with validation classes
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+
 
 // add custom service: Singleton, Scope, Transient
 builder.Services.AddScoped<IPhoneService, PhoneService>();

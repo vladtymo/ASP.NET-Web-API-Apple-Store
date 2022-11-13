@@ -1,6 +1,6 @@
-﻿using BusinessLogic.DTOs;
-using BusinessLogic.Interfaces;
-using BusinessLogic.Services;
+﻿using Core.DTOs;
+using Core.Interfaces;
+using Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
