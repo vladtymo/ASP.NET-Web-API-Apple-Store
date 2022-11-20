@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace restfull_api_server.Controllers
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] // user authorization is nedded
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] // user authorization is nedded
     [Route("api/[controller]")]
     [ApiController]
     public class PhonesController : ControllerBase
@@ -25,7 +25,6 @@ namespace restfull_api_server.Controllers
 
         [HttpGet("collection")]          // GET: ~/api/phones/collection
         //[HttpGet("/phone-collection")] // GET: ~/phone-collection
-        [AllowAnonymous]
         public IActionResult GetAll()
         {
             return Ok(phoneService.GetAll());
@@ -34,7 +33,6 @@ namespace restfull_api_server.Controllers
 
         // GET: ~/api/phones/{id}
         [HttpGet("{id}")]
-        [AllowAnonymous]
         public IActionResult Get([FromRoute] int id) // get parameter from route URL
         {
             return Ok(phoneService.Get(id));

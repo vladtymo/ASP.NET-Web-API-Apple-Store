@@ -10,7 +10,7 @@ namespace Core.Interfaces
     public interface IAccountService
     {
         Task Register(RegisterDTO data);
-        Task Login(string email, string password);
+        Task<LoginResponseDTO> Login(string email, string password);
         Task Logout();
     }
 }
